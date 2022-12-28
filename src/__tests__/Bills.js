@@ -29,7 +29,7 @@
        window.onNavigate(ROUTES_PATH.Bills)
        await waitFor(() => screen.getByTestId('icon-window'))
        const windowIcon = screen.getByTestId('icon-window')
-       expect(windowIcon.classList.contains('active-icon')).toBe(true)
+       expect(windowIcon.classList.contains('active-icon')).toBe(true) // On vérifie que la class active-icon soit présent
      })
  
      // TEST LOADING
@@ -38,7 +38,7 @@
            const html = BillsUI({ data: bills, loading: true });
            document.body.innerHTML = html;
            const isLoading = screen.getAllByText("Loading...");
-           expect(isLoading).toBeTruthy();
+           expect(isLoading).toBeTruthy(); // On vérifie que l'état du loading
        })
      })
  
@@ -47,17 +47,17 @@
            const html = BillsUI({ data: bills, error: true });
            document.body.innerHTML = html;
            const hasError = screen.getAllByText("Erreur");
-           expect(hasError).toBeTruthy();
+           expect(hasError).toBeTruthy(); // On vérifie que l'erreur se lance
        })
      }) 
  
-     describe("When I am on Bills page, dates should be deplay from ealiest to latest", () => {
+     describe("When I am on Bills page, dates should be deplay from earliest to latest", () => {
        test("Then, should return error",  () => {
          document.body.innerHTML = BillsUI({ data: bills })
          const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
          const antiChrono = (a, b) => ((a < b) ? 1 : -1)
-         const datesSorted = [...dates].sort(antiChrono)
-         expect(dates).toEqual(datesSorted)
+         const datesSorted = [...dates].sort(antiChrono) 
+         expect(dates).toEqual(datesSorted)  // On vérifie que les dates soient du plus récent au plus ancien
        })
      })
  
@@ -79,7 +79,7 @@
          const mockFunctionHandleClick = jest.fn(mockBills.handleClickNewBill);
          btnNewBill.addEventListener('click',mockFunctionHandleClick)
          fireEvent.click(btnNewBill)
-         expect(mockFunctionHandleClick).toHaveBeenCalled();
+         expect(mockFunctionHandleClick).toHaveBeenCalled(); // On vérifie que lors du clic sur le bouton que l'appel est bien appelé 
        }) 
      })
    })
@@ -112,8 +112,8 @@
        const firstEyeIcon = screen.getAllByTestId("icon-eye")[0];
        firstEyeIcon.addEventListener("click", handleClickIconEye)
        fireEvent.click(firstEyeIcon)
-       expect(handleClickIconEye).toHaveBeenCalled();
-       expect($.fn.modal).toHaveBeenCalled();
+       expect(handleClickIconEye).toHaveBeenCalled(); // On vérifie que l'appel est produit lors du click sur l'icon eye
+       expect($.fn.modal).toHaveBeenCalled(); // On vérifie que le modal est appelé 
      })
    })
  })
@@ -128,13 +128,13 @@
        document.body.append(root)
        router()
        window.onNavigate(ROUTES_PATH.Bills)
-       expect(await waitFor(() => screen.getByText('Mes notes de frais'))).toBeTruthy()
+       expect(await waitFor(() => screen.getByText('Mes notes de frais'))).toBeTruthy() 
      })
    })
  
  
    describe("When an error occurs on API", () => {
-     beforeEach(() => {
+     beforeEach(() => { // On lance plusieurs tests 
        jest.spyOn(mockStore, "bills")
        Object.defineProperty(
            window,
@@ -153,7 +153,7 @@
  
      // TEST 404 ERROR
      test("fetches bills from an API and fails with 404 message error", async () => {
-       mockStore.bills.mockImplementationOnce(() => {
+       mockStore.bills.mockImplementationOnce(() => { // permet de simuler une erreur 404
          return {
            list : () =>  {
              return Promise.reject(new Error("Erreur 404"))
@@ -167,7 +167,7 @@
  
      // TEST 500 ERROR
      test("fetches messages from an API and fails with 500 message error", async () => {
-       mockStore.bills.mockImplementationOnce(() => {
+       mockStore.bills.mockImplementationOnce(() => { // Permet de simuler une erreur 500
          return {
            list : () =>  {
              return Promise.reject(new Error("Erreur 500"))

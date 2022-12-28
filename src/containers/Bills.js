@@ -1,9 +1,18 @@
-import { ROUTES_PATH } from '../constants/routes.js'
-import { formatStatus } from "../app/format.js"
+import {
+  ROUTES_PATH
+} from '../constants/routes.js'
+import {
+  formatStatus
+} from "../app/format.js"
 import Logout from "./Logout.js"
 
 export default class {
-  constructor({ document, onNavigate, store, localStorage }) {
+  constructor({
+    document,
+    onNavigate,
+    store,
+    localStorage
+  }) {
     this.document = document
     this.onNavigate = onNavigate
     this.store = store
@@ -13,7 +22,11 @@ export default class {
     if (iconEye) iconEye.forEach(icon => {
       icon.addEventListener('click', () => this.handleClickIconEye(icon))
     })
-    new Logout({ document, localStorage, onNavigate })
+    new Logout({
+      document,
+      localStorage,
+      onNavigate
+    })
   }
 
   handleClickNewBill = () => {
@@ -36,7 +49,7 @@ export default class {
         .then((snapshot) => {
           const bills = snapshot.map((doc) => {
             try {
-              if(doc.date === null) {
+              if (doc.date === null) {
                 throw TypeError("One or mulptiple bill(s) contains invalid value(s) and was filtered to not display on the bills page")
               }
 

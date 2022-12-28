@@ -216,8 +216,8 @@ describe("Given that I am a user on login page", () => {
         "user",
         JSON.stringify({
           type: "Admin",
-          password: inputData.password,
           email: inputData.email,
+          password: inputData.password,
           status: "connected",
         })
       );

@@ -24,6 +24,8 @@ export default class NewBill {
     const file = fileInput.files[0]
     const fileName = file.name
     const validfileExtensionRegex = /.+png$|.+jpeg$|.+jpg$/i
+
+    /* On verifie bien que l'extension est de type png jpeg ou jpg sinon on montre le message d'erreur */
     
     if (validfileExtensionRegex.test(fileName)) {
       fileInput.classList.remove('invalid-form-control')

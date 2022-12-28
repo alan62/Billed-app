@@ -33,14 +33,15 @@ export default class Login {
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         this.document.body.style.backgroundColor="#fff"
       })
+
   }
 
   handleSubmitAdmin = e => {
     e.preventDefault()
     const user = {
       type: "Admin",
-      password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value, // changement employee-password-input test employee en admin
-      email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value, // changement employee-password-input test employee en admin
+      email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value, //change target value to admin
+      password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value, //change target value to admin
       status: "connected"
     }
     this.localStorage.setItem("user", JSON.stringify(user))
@@ -53,8 +54,7 @@ export default class Login {
         this.PREVIOUS_LOCATION = ROUTES_PATH['Dashboard']
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         document.body.style.backgroundColor="#fff"
-      }
-      )
+      })
   }
 
   // not need to cover this function by tests

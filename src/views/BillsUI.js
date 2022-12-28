@@ -19,6 +19,7 @@ const row = (bill) => {
     `
 }
 
+/* Ordonner les factures du plus récent au plus ancien */
 const rows = (data) => {
 	if(data && data.length) {
     const billsSorted = data.filter(invalidBills).sort(antiChrono)
@@ -31,8 +32,8 @@ const rows = (data) => {
 const invalidBills = (bill) => (bill.date === null ? false : true)
 
 const antiChrono = (a, b) => {
-  const currentDate = a.hasOwnProperty("ISODate") ? a.ISODate : a.date
-  const nextDate = b.hasOwnProperty("ISODate") ? b.ISODate : b.date
+  const currentDate = a.hasOwnProperty("ISODate") ? a.ISODate : a.date // On vérifie si la date est au format ISO 
+  const nextDate = b.hasOwnProperty("ISODate") ? b.ISODate : b.date // On vérifie si la date est au format ISO
 
   return (currentDate < nextDate ? 1 : (currentDate > nextDate) ? -1 : 0)
 }
